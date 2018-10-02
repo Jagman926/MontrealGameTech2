@@ -1517,11 +1517,6 @@ Prefab:
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 67426d99949f7aa4ba04714c8b6384cb, type: 2}
   m_IsPrefabAsset: 0
---- !u!4 &846136525 stripped
-Transform:
-  m_CorrespondingSourceObject: {fileID: 4381778622765274, guid: 67426d99949f7aa4ba04714c8b6384cb,
-    type: 2}
-  m_PrefabInternal: {fileID: 846136524}
 --- !u!1 &882294726
 GameObject:
   m_ObjectHideFlags: 0
@@ -1697,15 +1692,6 @@ Prefab:
       propertyPath: m_Camera
       value: 
       objectReference: {fileID: 282840813}
-    - target: {fileID: 1961844938802820, guid: 2ae1ef3c900d79746936461b29585819, type: 2}
-      propertyPath: m_Name
-      value: StaminaBar_Fill_Player
-      objectReference: {fileID: 0}
-    - target: {fileID: 114974515367876512, guid: 2ae1ef3c900d79746936461b29585819,
-        type: 2}
-      propertyPath: m_FillAmount
-      value: 1
-      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 2ae1ef3c900d79746936461b29585819, type: 2}
   m_IsPrefabAsset: 0
@@ -2299,46 +2285,6 @@ Prefab:
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: faa4047ab8fe9504c9e348f3be726ba0, type: 2}
   m_IsPrefabAsset: 0
---- !u!1 &1441231417
-GameObject:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 0}
-  serializedVersion: 6
-  m_Component:
-  - component: {fileID: 1441231418}
-  - component: {fileID: 1441231419}
-  m_Layer: 0
-  m_Name: EventManager
-  m_TagString: Untagged
-  m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
-  m_IsActive: 1
---- !u!4 &1441231418
-Transform:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 0}
-  m_GameObject: {fileID: 1441231417}
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
-  m_Children: []
-  m_Father: {fileID: 846136525}
-  m_RootOrder: 3
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &1441231419
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 0}
-  m_GameObject: {fileID: 1441231417}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 10a3b1e7ea0f2b24b955668377ebe33c, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!4 &1520765910 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 4441315863823772, guid: 4554881073a84144abf274df502f95e3,

@@ -286,6 +286,8 @@ MonoBehaviour:
   currPlayerStamina: 100
   staminaDepletionRate: 1
   staminaRechargeRate: 1
+  soundRadius: 0
+  soundTravelDistance: 10
   isGrounded: 0
 --- !u!136 &136442122562942730
 CapsuleCollider:
