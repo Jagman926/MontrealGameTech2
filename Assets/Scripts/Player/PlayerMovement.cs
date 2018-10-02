@@ -9,7 +9,9 @@ public class PlayerMovement : MonoBehaviour
 
 	public float currentMoveSpeed = 0;
     public float maxMoveSpeed = 0;
-	public float currentRotationSpeed = 0;
+	public float currentXRotationSpeed = 0;
+	public float currentYRotationSpeed = 0;
+    private float yaw = 0.0f;
 
 	[Header("Player Gravity Modifiers")]
 
@@ -121,13 +123,20 @@ public class PlayerMovement : MonoBehaviour
 	//On Update(), check if Player is rotating (using Input)
 	private void BasicPlayerRotate()
 	{
-		float mouseX = Input.GetAxis("Mouse X") * Time.deltaTime * currentRotationSpeed;
+		float mouseX = Input.GetAxis("Mouse X") * Time.deltaTime * currentXRotationSpeed;
 
 		if(mouseX != 0)
 		{
 			 //Rotate the Player accordingly
 			transform.Rotate(0, mouseX, 0);
 		}
+		//Rotate player camera
+		yaw -= currentYRotationSpeed * Input.GetAxis("Mouse Y");
+		//Clamp between 90 degree angles (gives 180 view vertically)
+		yaw = Mathf.Clamp(yaw, -90.0f, 90.0f);
+		//Transform camera angles
+		Transform cameraTransform = transform.GetChild(0).transform;
+        cameraTransform.eulerAngles = new Vector3(yaw, cameraTransform.eulerAngles.y, cameraTransform.eulerAngles.z);
 	}
 
 	//On Fixed Update, check if player can jump, and is jumping
