@@ -11,7 +11,7 @@ public class PlayerMovement : MonoBehaviour
     public float maxMoveSpeed = 0;
 	public float currentXRotationSpeed = 0;
 	public float currentYRotationSpeed = 0;
-    private float yaw = 0.0f;
+    private float yawCam = 0.0f;
 
 	[Header("Player Gravity Modifiers")]
 
@@ -31,9 +31,16 @@ public class PlayerMovement : MonoBehaviour
     public float soundRadius = 0;
     public float soundTravelDistance = 10;
 
+	[Header("Light")]
+
+	public bool isLit;
+	private Light playerLight;
+
     [Header("Is Player Grounded")]
 
 	public bool isGrounded;
+	public float groundCheckDistance;
+	private int groundLayerMask = 1 << 12;
 
 	//////////////////////////////////////
 
@@ -44,12 +51,17 @@ public class PlayerMovement : MonoBehaviour
 		thisRigidBody = this.gameObject.GetComponent<Rigidbody>();
 		//Hide the cursor on screen
 		Cursor.visible = false;
+		//Player light
+		playerLight = GameObject.Find("FlashLightLight").GetComponent<Light>();
+
 	}
 	
 	//Every frame....(Best used for anything not physics related)
 	void Update()
 	{
         UpdateSprint();
+		UpdateGrounding();
+		UpdatePlayerLight();
 		BasicPlayerRotate();
         UpdateSoundRadius();
 	}
@@ -74,6 +86,16 @@ public class PlayerMovement : MonoBehaviour
             thisRigidBody.AddForce((((transform.forward * yMove) + (transform.right * xMove)) * currentMoveSpeed), ForceMode.Acceleration);
     }
 
+	private void UpdateGrounding()
+	{
+		RaycastHit hit;
+        //Check if raycast hits floor layer
+        if (Physics.Raycast(transform.position, transform.TransformDirection(Vector3.down), out hit, groundCheckDistance, groundLayerMask))
+        {
+			isGrounded = true;
+        }
+	}
+
     private void UpdateSprint()
     {
         //While sprint key held down
@@ -87,13 +109,11 @@ public class PlayerMovement : MonoBehaviour
                 //Set movement speed to sprint speed
                 currentMoveSpeed = sprintSpeed;
             }
-            else
-            {
-                //Recharge stamina and set move speed
-                RechargeStamina();
-                //Send message
-                Debug.Log("ERROR - NOT ENOUGH STAMINA");
-            }
+			else
+			{
+				currentMoveSpeed = maxMoveSpeed;
+				Debug.Log("Out of Stamina");
+			}
         }
         //If not pressing button
         else
@@ -120,6 +140,22 @@ public class PlayerMovement : MonoBehaviour
         soundRadius = thisRigidBody.velocity.magnitude;
     }
 
+	private void UpdatePlayerLight()
+	{
+		if(Input.GetKeyDown(KeyCode.E))
+		{
+			isLit = !isLit;
+		}
+		if(isLit)
+		{
+			playerLight.intensity = 20;
+		}
+		else
+		{
+			playerLight.intensity = 0;
+		}
+	}
+
 	//On Update(), check if Player is rotating (using Input)
 	private void BasicPlayerRotate()
 	{
@@ -131,12 +167,12 @@ public class PlayerMovement : MonoBehaviour
 			transform.Rotate(0, mouseX, 0);
 		}
 		//Rotate player camera
-		yaw -= currentYRotationSpeed * Input.GetAxis("Mouse Y");
+		yawCam -= currentYRotationSpeed * Input.GetAxis("Mouse Y");
 		//Clamp between 90 degree angles (gives 180 view vertically)
-		yaw = Mathf.Clamp(yaw, -90.0f, 90.0f);
+		yawCam = Mathf.Clamp(yawCam, -90.0f, 90.0f);
 		//Transform camera angles
 		Transform cameraTransform = transform.GetChild(0).transform;
-        cameraTransform.eulerAngles = new Vector3(yaw, cameraTransform.eulerAngles.y, cameraTransform.eulerAngles.z);
+        cameraTransform.eulerAngles = new Vector3(yawCam, cameraTransform.eulerAngles.y, cameraTransform.eulerAngles.z);
 	}
 
 	//On Fixed Update, check if player can jump, and is jumping
@@ -151,9 +187,7 @@ public class PlayerMovement : MonoBehaviour
 				// Here, we use a physics transformation by adding a force to our player
 				// The type of force applied can be modified using the "ForceMode" argument 
 				thisRigidBody.AddForce(jump, ForceMode.Impulse);
-
-				//Depending on the way you determine if the player is grounded (here, only when he collides again with the floor), make sure to set the variable to the
-				//correct value, to prevent the player from jumping indefinitely.
+				//Set grounded to false
 				isGrounded = false;
 			}
 		}
@@ -173,11 +207,5 @@ public class PlayerMovement : MonoBehaviour
 				thisRigidBody.AddForce(fall, ForceMode.Acceleration);
 			}
 		}
-	}
-
-	private void OnCollisionStay(Collision col)
-	{
-		if(col.gameObject.tag == "Floor")
-			isGrounded = true;
 	}
 }
