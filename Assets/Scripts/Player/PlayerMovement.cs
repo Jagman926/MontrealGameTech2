@@ -34,6 +34,7 @@ public class PlayerMovement : MonoBehaviour
 	[Header("Light")]
 
 	public bool isLit;
+	public AudioClip lightClip;
 	private Light playerLight;
 
     [Header("Is Player Grounded")]
@@ -144,7 +145,12 @@ public class PlayerMovement : MonoBehaviour
 	{
 		if(Input.GetKeyDown(KeyCode.E))
 		{
+			//Set light on and off
 			isLit = !isLit;
+			//Play sound
+			AudioSource audio = GetComponent<AudioSource>();
+        	audio.clip = lightClip;
+        	audio.Play();
 		}
 		if(isLit)
 		{
