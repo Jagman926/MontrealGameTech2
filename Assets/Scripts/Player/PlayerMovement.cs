@@ -53,7 +53,7 @@ public class PlayerMovement : MonoBehaviour
 		//Hide the cursor on screen
 		Cursor.visible = false;
 		//Player light
-		playerLight = GameObject.Find("FlashLightLight").GetComponent<Light>();
+		playerLight = GameObject.Find("FlashLightBeam").GetComponent<Light>();
 
 	}
 	
