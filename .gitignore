@@ -7066,3 +7066,16 @@ Temp/output-fd0f1617569c37a489d324f6ee33d6a7.unwrap
 Temp/output-fe71eb04ba435d345b4b6f6a6d7fe88e.unwrap
 Temp/UnityTempFile-d9b580815a34b9142abdc6b6be55c397
 Temp/UnityTempFile-f7ad4518819869f46b158c2a3c291a7e
+*.dll
+*.mdb
+*.config
+*.assets
+*.resS
+*.resource
+*.txt
+*.bin
+*.buildreport
+*.log
+Library/PlayerDataCache/Win64/Data/Resources/unity_builtin_extra
+Library/PlayerDataCache/Win64/Data/globalgamemanagers
+Library/PlayerDataCache/Win64/Data/level0
