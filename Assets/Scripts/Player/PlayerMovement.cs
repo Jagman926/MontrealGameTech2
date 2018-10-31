@@ -34,6 +34,7 @@ public class PlayerMovement : MonoBehaviour
 	[Header("Light")]
 
 	public bool isLit;
+	public float lightIntensity;
 	public AudioClip lightClip;
 	private Light playerLight;
 
@@ -154,7 +155,7 @@ public class PlayerMovement : MonoBehaviour
 		}
 		if(isLit)
 		{
-			playerLight.intensity = 20;
+			playerLight.intensity = lightIntensity;
 		}
 		else
 		{
