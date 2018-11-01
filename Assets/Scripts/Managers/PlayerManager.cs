@@ -2,13 +2,8 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-
-//A NAMESPACE is used here, to make sure all our managers are nicely grouped when using the editor's auto-complete
-//This makes it much easier to organise classes and keep your code readable on large-scale projects
 namespace Managers
 {
-	//PlayerManager inherits from the SINGLETON class, making it accessible from all other classes and methods.
-	//This also makes sure that only a single PlayerManager exists at any given time.
 	public class PlayerManager : Singleton <PlayerManager>
 	{
 		public GameObject thePlayer;
