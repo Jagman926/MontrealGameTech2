@@ -4,7 +4,6 @@ using UnityEngine;
 
 public class PlayerMovement : MonoBehaviour 
 {
-	//Use HEADERS to neatly organize public variables in the Unity's Inspector Window
 	[Header("Player Movement Modifiers")]
 
 	public float currentMoveSpeed = 0;
