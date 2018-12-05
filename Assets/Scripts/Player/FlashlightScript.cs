@@ -6,7 +6,7 @@ using Valve.VR.InteractionSystem;
 
 public class FlashlightScript : MonoBehaviour
 {
-    public Hand hand;
+    private Hand hand;
 
     [Header("Light")]
     public bool isLit;
@@ -18,10 +18,14 @@ public class FlashlightScript : MonoBehaviour
     {
         //Player light
         playerLight = GameObject.Find("FlashLightBeam").GetComponent<Light>();
+        //
+        isLit = false;
     }
 
     void Update()
     {
+        UpdateHand();
+        //While the flashlight is held
         UpdatePlayerLight();
     }
 
@@ -35,9 +39,14 @@ public class FlashlightScript : MonoBehaviour
         audio.Play();
     }
 
+    private void UpdateHand()
+    {
+        hand = gameObject.GetComponent<Interactable>().attachedToHand;
+    }
+
     private void UpdatePlayerLight()
     {
-        if(SteamVR_Input._default.inActions.Teleport.GetStateDown(hand.handType))
+        if (hand != null && SteamVR_Input._default.inActions.Teleport.GetStateDown(hand.handType))
         {
             ToggleLight();
         }
